@@ -1,6 +1,6 @@
 const container = document.querySelector('.brewery-container');
 const form = document.querySelector('.form');
-// const nameinput = document.getElementById('city-name');
+const nameinput = document.getElementById('city-name');
 
 form.addEventListener('submit', (e)=>{
     e.preventDefault();
@@ -14,6 +14,7 @@ form.addEventListener('submit', (e)=>{
     .then(() => {
         document.getElementById('city-name').value = '';
     })
+    
 
     
     
@@ -22,9 +23,16 @@ form.addEventListener('submit', (e)=>{
 async function getData(city){
     const response = await fetch(`https://api.openbrewerydb.org/breweries?by_city=${city}`);
     const data = await response.json();
-    console.log(`https://api.openbrewerydb.org/breweries?by_city=${city}`)
-    
     let obj= data;
+
+    if (obj.length == 0){
+       nameinput.classList.add('error')
+        return setTimeout(()=>{
+        nameinput.classList.remove('error');
+       }, 1000)
+    }
+    
+    
     obj = obj.filter((item)=> {
         if (item.website_url && item.street) {
             return item

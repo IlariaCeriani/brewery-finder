@@ -53,6 +53,10 @@ header {
 .form input {
     font-size: 1.2rem;
 }
+.error {
+    outline: 2px solid red;
+    outline-offset: -2px;
+}
 .form button {
     background-color: #212121cc;
     font-weight: bold;
